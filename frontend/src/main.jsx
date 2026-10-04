@@ -16,18 +16,71 @@ function App() {
   const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
-    Promise.all([
-      fetch(`${API}/dashboard`).then(r => r.json()),
-      fetch(`${API}/events`).then(r => r.json()),
-      fetch(`${API}/issues`).then(r => r.json()),
-      fetch(`${API}/recommendations`).then(r => r.json())
-    ]).then(([s, e, i, r]) => {
-      setStats(s);
-      setEvents(e);
-      setIssues(i);
-      setRecommendations(r);
-    }).catch(() => {});
-  }, []);
+  setStats({
+    students: 12482,
+    events: 3821,
+    openIssues: 14,
+    engagement: 94
+  });
+
+  const demoEvents = [
+    {
+      _id: "1",
+      title: "AI / ML Workshop",
+      description: "Hands-on machine learning workshop.",
+      category: "AI/ML",
+      location: "Innovation Hub",
+      registered: 84,
+      capacity: 120,
+      match: 92,
+      date: new Date(Date.now() + 86400000)
+    },
+    {
+      _id: "2",
+      title: "Hackathon Meetup",
+      description: "Meet builders and form your hackathon team.",
+      category: "Hackathon",
+      location: "Engineering Block",
+      registered: 101,
+      capacity: 150,
+      match: 87,
+      date: new Date(Date.now() + 172800000)
+    },
+    {
+      _id: "3",
+      title: "DSA Mock Interview",
+      description: "Practice technical interview questions.",
+      category: "DSA",
+      location: "Library",
+      registered: 62,
+      capacity: 80,
+      match: 81,
+      date: new Date(Date.now() + 259200000)
+    }
+  ];
+
+  setEvents(demoEvents);
+  setRecommendations(demoEvents);
+
+  setIssues([
+    {
+      _id: "1",
+      title: "Projector malfunction",
+      category: "Infrastructure",
+      location: "Block A",
+      priority: "high",
+      status: "open"
+    },
+    {
+      _id: "2",
+      title: "Water dispenser maintenance",
+      category: "Facilities",
+      location: "Library",
+      priority: "medium",
+      status: "progress"
+    }
+  ]);
+}, []);
 
   const nav = [
     ["dashboard", LayoutDashboard, "Dashboard"],
